@@ -2,7 +2,7 @@
 
 There are 2 primary types of identities, Flash and Standard.
 Flash identities have a short lived fingerprint and ip address. They allow a user to reset all related browsing and tracking data, as well as their ip address and even location in a few seconds.
-Standard identities are long lived and their fingerprint is fixed. If there is an issue with their proxy it can be replaced but takes a minute or more rather than seconds. Generally, polling the identity is required to determine when the identity is available again.
+Standard identities are long lived and their fingerprint is fixed.
 
 ## Routes
 
@@ -44,11 +44,6 @@ Standard identities are long lived and their fingerprint is fixed. If there is a
       "path": "/:id/flash",
       "method": "post",
       "description": "get a new proxy container and ip address for a flash identity"
-    },
-    {
-      "path": "/:id/refresh",
-      "method": "post",
-      "description": "get a new proxy container and ip address for a standard identity"
     }
   ]
 }
