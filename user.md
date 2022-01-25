@@ -1,3 +1,6 @@
+# User
+In the MirageID system there are 2 types of users. Parent users which are account owners, and child users which are additional user's who's access is limited to what the parent has access to how the parent has set their permissions
+
 ## Routes
 ```json
 {
@@ -6,7 +9,7 @@
     {
       "path": "/",
       "method": "get",
-      "description": "Get the current user record",
+      "description": "Get the current user's record",
     },
     {
       "path": "/children/:id",
