@@ -1,6 +1,6 @@
 # User
 
-In the MirageID system there are 2 types of users. Parent users which are account owners, and child users which are additional user's who's access is limited to what the parent has access to how the parent has set their permissions
+In the MirageID system there are 2 types of users. Parent users which are account owners and child users which are additional users who's access is limited to the permissions that have been set by the parent user.
 
 ## Routes
 
@@ -13,6 +13,11 @@ In the MirageID system there are 2 types of users. Parent users which are accoun
       "method": "get",
       "description": "Get the current user's record"
     },
+    {
+      "path": "/:uid",
+      "method": "put",
+      "description": "update a user by uid, can be used to update a child user"
+    }
     {
       "path": "/children/:id",
       "method": "delete",
@@ -28,20 +33,15 @@ In the MirageID system there are 2 types of users. Parent users which are accoun
       "method": "get",
       "description": "Get a list of child users"
     },
-    {
-      "path": "/identity_permissions",
-      "method": "post",
-      "description": "update the list of users that can access/edit an identity. This endpoint does not use the standard schema and it's request body is documented below",
-      "body": {
-        "identityId": "the id of the identity",
-        "write": "the total list of users that will be able to edit this identity",
-        "read": "the total list of users that will be able to access this identity"
-      }
+        {
+      "path": "/children/:uid",
+      "method": "get",
+      "description": "Get a child user by uid"
     },
-    {
-      "path": "/:uid",
+        {
+      "path": "children/:uid",
       "method": "put",
-      "description": "update a user by uid, can be used to update a child user"
+      "description": "update a child user by uid"
     }
   ]
 }
@@ -65,20 +65,12 @@ In the MirageID system there are 2 types of users. Parent users which are accoun
     "readOnly": true
   },
   "permissions": {
-    "type": "object",
-    // this field is only applicable to child users
+    "type": ["object", "undefined"],
     "default": {
       "identity": {
         "write": false
       },
       "identities": false,
-      // Example
-      // {
-      //   '-LxvqfQ6rqXyetGCYLQk': {
-      //     read: true,
-      //     write: true,
-      //   },
-      // }
       "user": {
         "read": false,
         "write": false
@@ -86,12 +78,12 @@ In the MirageID system there are 2 types of users. Parent users which are accoun
       "passwordManager": {
         "write": false
       }
-    }
+    },
   },
-  "deleted": {
-    "type": ["number", "boolean"],
-    "default": false,
-    "readOnly": true
+  "deletedAt": {
+    "type": ["string", "boolean"],
+    "readOnly": true,
+    "default": false
   },
   "status": {
     "type": "string",
@@ -100,3 +92,23 @@ In the MirageID system there are 2 types of users. Parent users which are accoun
   }
 }
 ```
+
+### User permission
+Child users can be granted fine grained access to the parent user's account and identities.
+The `permissions` value only exists on child and not parent users.
+All permissions values are booleans.
+
+- `identity` - General identity permissions
+  - `write` - `boolean` Whether the user can create identities.
+
+- `identities` - Permissions granted for a specific identity (an object keyed by identity ids)
+  - `-LxvqfQ6rqXyetGCYLQk` - The id of the identity
+    - `read` - Whether the user can access the identity,
+    - `write` - Whether the user can edit the identity,
+
+- `user` - User management permissions
+  - `read` - Whether the user can access a list of other child users on the account
+  - `write` - Whether the user can create/edit child users on the account
+
+- `passwordManager` - Access to the build in password manager (all users can autofill passwords)
+  - `write` - Whether the user can save new passwords to the password manager

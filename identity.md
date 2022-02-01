@@ -1,8 +1,5 @@
 # Identity
-
-There are 2 primary types of identities, Flash and Standard.
-Flash identities have a short lived fingerprint and ip address. They allow a user to reset all related browsing and tracking data, as well as their ip address and even location in a few seconds.
-Standard identities are long lived and their fingerprint is fixed.
+Identities are the primary resource is the MirageID system. This API allows identities to be managed.
 
 ## Routes
 
@@ -18,12 +15,12 @@ Standard identities are long lived and their fingerprint is fixed.
     {
       "path": "/",
       "method": "get",
-      "description": "get a list of identities"
+      "description": "Get a list of identities"
     },
     {
       "path": "/?uid=<uid>",
       "method": "get",
-      "description": "get a list of identities for a child user"
+      "description": "Get a list of identities that a child user has access to"
     },
     {
       "path": "/:id",
@@ -40,11 +37,6 @@ Standard identities are long lived and their fingerprint is fixed.
       "method": "get",
       "description": "Get a single identity by id"
     },
-    {
-      "path": "/:id/flash",
-      "method": "post",
-      "description": "get a new proxy container and ip address for a flash identity"
-    }
   ]
 }
 ```
@@ -64,7 +56,7 @@ Standard identities are long lived and their fingerprint is fixed.
   "type": {
     "type": "string",
     "required": true,
-    "enum": ["Standard", "Flash"]
+    "enum": ["Standard"]
   },
   "region": {
     "type": "string",
@@ -98,7 +90,7 @@ Standard identities are long lived and their fingerprint is fixed.
     "readOnly": true
   },
   "deletedAt": {
-    "type": "string",
+    "type": ["string", "boolean"],
     "readOnly": true,
     "default": false
   },
@@ -150,11 +142,13 @@ Standard identities are long lived and their fingerprint is fixed.
   },
   "allowListAdd": {
     "type": "string",
-    "description": "A comma separated list of websites to be added to the allowList"
+    "description": "A comma separated list of websites to be added to the allowList",
+    "readable": false
   },
   "allowListRemove": {
     "type": "string",
-    "description": "A comma separated list of websites to be removed from the allowList"
+    "description": "A comma separated list of websites to be removed from the allowList",
+    "readable": false
   }
 }
 ```

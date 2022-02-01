@@ -75,3 +75,4 @@ The schema describes but the request and response shape of an entity. Some field
   * `required` - A field that must be included in the body of a `POST` request
   * `enum` - When the value of `type` is "string" this is used to describe a limited set of strings that are valid values
   * `default` - The default value set for a field on create if none if provided
+  * `readable` - Whether the field is returned from the api using a `get` call or only sent as a field in a `post` or `put` call
