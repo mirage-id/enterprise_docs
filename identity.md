@@ -121,12 +121,12 @@ Identities are the primary resource is the MirageID system. This API allows iden
     "default": false,
     "readOnly": true
   },
-  "users_read_permissions": {
+  "usersReadPermissions": {
     "type": "string",
     "default": "",
     "description": "a comma separated string of child uids that can access the identity"
   },
-  "users_write_permissions": {
+  "usersWritePermissions": {
     "type": "string",
     "default": "",
     "description": "a comma separated string of child uids that can edit the identity"
