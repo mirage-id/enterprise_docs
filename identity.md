@@ -15,12 +15,14 @@ Identities are the primary resource is the MirageID system. This API allows iden
     {
       "path": "/",
       "method": "get",
-      "description": "Get a list of identities"
-    },
-    {
-      "path": "/?uid=<uid>",
-      "method": "get",
-      "description": "Get a list of identities that a child user has access to"
+      "description": "Get a list of identities",
+      "searchParams": [
+        {
+          "key": "uid",
+          "description": "The value should be the uid of a child user. Using this in the search string will return the subset of identities that the child user has permissions to access",
+          "example": "?uid=o3TV1gGIukQteDEom43B9WjSpj93"
+        }
+      ]
     },
     {
       "path": "/:id",

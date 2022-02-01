@@ -65,6 +65,10 @@ Currently, the API documentation is an excerpt of configuration files used to se
   * `path` - The sub-path of `basePath` used to address the endpoint
   * `method` - The required http method
   * `description` - A concise description of the operation performed by a given route
+  * `searchParams` - An array of parameters that can be passed in the url search string to filter/search a given endpoint's response
+    * `key` - The name used in the url search string `?key=value` 
+    * `description`
+    * `example`
 
 ### Schema
 The schema describes but the request and response shape of an entity. Some fields are only available in one or the other as described below:
@@ -75,4 +79,4 @@ The schema describes but the request and response shape of an entity. Some field
   * `required` - A field that must be included in the body of a `POST` request
   * `enum` - When the value of `type` is "string" this is used to describe a limited set of strings that are valid values
   * `default` - The default value set for a field on create if none if provided
-  * `readable` - Whether the field is returned from the api using a `get` call or only sent as a field in a `post` or `put` call
+  * `readable` - When `false` the field is not returned from the api using a `get` call and can only be sent as a field in a `post` or `put` call. 
