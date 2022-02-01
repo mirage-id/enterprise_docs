@@ -89,6 +89,11 @@ In the MirageID system there are 2 types of users. Parent users which are accoun
     "type": "string",
     "enum": ["active", "trial", "disabled", "deleted"],
     "readOnly": true
+  },
+  "masterPassword": {
+    "type": "string",
+    "readable": false,
+    "description": "Required (and only included) when creating a child user. This is the password for the parent user's account. It is needed to create an encrypted key for the child that is compatible with the parent's"
   }
 }
 ```
