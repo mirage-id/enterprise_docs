@@ -14,11 +14,6 @@ In the MirageID system there are 2 types of users. Parent users which are accoun
       "description": "Get the current user's record"
     },
     {
-      "path": "/:uid",
-      "method": "put",
-      "description": "update a user by uid, can be used to update a child user"
-    }
-    {
       "path": "/children/:id",
       "method": "delete",
       "description": "Delete a child user"
